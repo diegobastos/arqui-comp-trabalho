@@ -1,0 +1,136 @@
+Performing C++ SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_6573c/fast && /usr/bin/make -f CMakeFiles/cmTC_6573c.dir/build.make CMakeFiles/cmTC_6573c.dir/build
+make[1]: Entrando no diretório '/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_6573c.dir/src.cxx.o
+/usr/bin/c++    -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_6573c.dir/src.cxx.o -c /home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_6573c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6573c.dir/link.txt --verbose=1
+/usr/bin/c++   -DCMAKE_HAVE_LIBC_PTHREAD    CMakeFiles/cmTC_6573c.dir/src.cxx.o  -o cmTC_6573c 
+/usr/bin/ld: CMakeFiles/cmTC_6573c.dir/src.cxx.o: na função "main":
+src.cxx:(.text+0x46): referência não definida para "pthread_create"
+/usr/bin/ld: src.cxx:(.text+0x52): referência não definida para "pthread_detach"
+/usr/bin/ld: src.cxx:(.text+0x63): referência não definida para "pthread_join"
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_6573c.dir/build.make:87: cmTC_6573c] Erro 1
+make[1]: Saindo do diretório '/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_6573c/fast] Erro 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Performing C++ SOURCE FILE Test CXXBuiltIn_FS_BuiltIn failed with the following output:
+Change Dir: /home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_bc0df/fast && /usr/bin/make -f CMakeFiles/cmTC_bc0df.dir/build.make CMakeFiles/cmTC_bc0df.dir/build
+make[1]: Entrando no diretório '/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_bc0df.dir/src.cxx.o
+/usr/bin/c++    -DCXXBuiltIn_FS_BuiltIn   -o CMakeFiles/cmTC_bc0df.dir/src.cxx.o -c /home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx:4:22: error: ‘std::filesystem’ has not been declared
+    4 |                 std::filesystem::path p{" mp/"};
+      |                      ^~~~~~~~~~
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx:5:28: error: ‘std::filesystem’ has not been declared
+    5 |                 throw std::filesystem::filesystem_error("Empty file name!", std::make_error_code(std::errc::invalid_argument));
+      |                            ^~~~~~~~~~
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx:5:82: error: ‘make_error_code’ is not a member of ‘std’
+    5 |                 throw std::filesystem::filesystem_error("Empty file name!", std::make_error_code(std::errc::invalid_argument));
+      |                                                                                  ^~~~~~~~~~~~~~~
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx:5:103: error: ‘std::errc’ has not been declared
+    5 |                 throw std::filesystem::filesystem_error("Empty file name!", std::make_error_code(std::errc::invalid_argument));
+      |                                                                                                       ^~~~
+make[1]: *** [CMakeFiles/cmTC_bc0df.dir/build.make:66: CMakeFiles/cmTC_bc0df.dir/src.cxx.o] Erro 1
+make[1]: Saindo do diretório '/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_bc0df/fast] Erro 2
+
+
+Source file was:
+#include <filesystem>
+            int main()
+            {
+                std::filesystem::path p{"	mp/"};
+                throw std::filesystem::filesystem_error("Empty file name!", std::make_error_code(std::errc::invalid_argument));
+            }
+Performing C++ SOURCE FILE Test CXXBuiltIn_FS_stdcppfs failed with the following output:
+Change Dir: /home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_41dc7/fast && /usr/bin/make -f CMakeFiles/cmTC_41dc7.dir/build.make CMakeFiles/cmTC_41dc7.dir/build
+make[1]: Entrando no diretório '/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_41dc7.dir/src.cxx.o
+/usr/bin/c++    -DCXXBuiltIn_FS_stdcppfs   -o CMakeFiles/cmTC_41dc7.dir/src.cxx.o -c /home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx:4:22: error: ‘std::filesystem’ has not been declared
+    4 |                 std::filesystem::path p{" mp/"};
+      |                      ^~~~~~~~~~
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx:5:28: error: ‘std::filesystem’ has not been declared
+    5 |                 throw std::filesystem::filesystem_error("Empty file name!", std::make_error_code(std::errc::invalid_argument));
+      |                            ^~~~~~~~~~
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx:5:82: error: ‘make_error_code’ is not a member of ‘std’
+    5 |                 throw std::filesystem::filesystem_error("Empty file name!", std::make_error_code(std::errc::invalid_argument));
+      |                                                                                  ^~~~~~~~~~~~~~~
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx:5:103: error: ‘std::errc’ has not been declared
+    5 |                 throw std::filesystem::filesystem_error("Empty file name!", std::make_error_code(std::errc::invalid_argument));
+      |                                                                                                       ^~~~
+make[1]: *** [CMakeFiles/cmTC_41dc7.dir/build.make:66: CMakeFiles/cmTC_41dc7.dir/src.cxx.o] Erro 1
+make[1]: Saindo do diretório '/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_41dc7/fast] Erro 2
+
+
+Source file was:
+#include <filesystem>
+            int main()
+            {
+                std::filesystem::path p{"	mp/"};
+                throw std::filesystem::filesystem_error("Empty file name!", std::make_error_code(std::errc::invalid_argument));
+            }
+Performing C++ SOURCE FILE Test CXXBuiltIn_FS_cppfs failed with the following output:
+Change Dir: /home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c1549/fast && /usr/bin/make -f CMakeFiles/cmTC_c1549.dir/build.make CMakeFiles/cmTC_c1549.dir/build
+make[1]: Entrando no diretório '/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_c1549.dir/src.cxx.o
+/usr/bin/c++    -DCXXBuiltIn_FS_cppfs   -o CMakeFiles/cmTC_c1549.dir/src.cxx.o -c /home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx:4:22: error: ‘std::filesystem’ has not been declared
+    4 |                 std::filesystem::path p{" mp/"};
+      |                      ^~~~~~~~~~
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx:5:28: error: ‘std::filesystem’ has not been declared
+    5 |                 throw std::filesystem::filesystem_error("Empty file name!", std::make_error_code(std::errc::invalid_argument));
+      |                            ^~~~~~~~~~
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx:5:82: error: ‘make_error_code’ is not a member of ‘std’
+    5 |                 throw std::filesystem::filesystem_error("Empty file name!", std::make_error_code(std::errc::invalid_argument));
+      |                                                                                  ^~~~~~~~~~~~~~~
+/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp/src.cxx:5:103: error: ‘std::errc’ has not been declared
+    5 |                 throw std::filesystem::filesystem_error("Empty file name!", std::make_error_code(std::errc::invalid_argument));
+      |                                                                                                       ^~~~
+make[1]: *** [CMakeFiles/cmTC_c1549.dir/build.make:66: CMakeFiles/cmTC_c1549.dir/src.cxx.o] Erro 1
+make[1]: Saindo do diretório '/home/jr/development/arquitetura/TFSim/nana/built/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_c1549/fast] Erro 2
+
+
+Source file was:
+#include <filesystem>
+            int main()
+            {
+                std::filesystem::path p{"	mp/"};
+                throw std::filesystem::filesystem_error("Empty file name!", std::make_error_code(std::errc::invalid_argument));
+            }

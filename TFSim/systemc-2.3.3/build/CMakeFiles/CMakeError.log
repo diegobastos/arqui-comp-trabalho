@@ -1,0 +1,250 @@
+Determining if the __sparc exist failed with the following output:
+Change Dir: /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d803e/fast && /usr/bin/make -f CMakeFiles/cmTC_d803e.dir/build.make CMakeFiles/cmTC_d803e.dir/build
+make[1]: Entrando no diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d803e.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_d803e.dir/CheckSymbolExists.c.o   -c /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: error: ‘__sparc’ undeclared (first use in this function)
+    7 |   return ((int*)(&__sparc))[argc];
+      |                   ^~~~~~~
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: *** [CMakeFiles/cmTC_d803e.dir/build.make:66: CMakeFiles/cmTC_d803e.dir/CheckSymbolExists.c.o] Erro 1
+make[1]: Saindo do diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_d803e/fast] Erro 2
+
+
+File /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __sparc
+  return ((int*)(&__sparc))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the __sparc__ exist failed with the following output:
+Change Dir: /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c17ea/fast && /usr/bin/make -f CMakeFiles/cmTC_c17ea.dir/build.make CMakeFiles/cmTC_c17ea.dir/build
+make[1]: Entrando no diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c17ea.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_c17ea.dir/CheckSymbolExists.c.o   -c /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: error: ‘__sparc__’ undeclared (first use in this function)
+    7 |   return ((int*)(&__sparc__))[argc];
+      |                   ^~~~~~~~~
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: *** [CMakeFiles/cmTC_c17ea.dir/build.make:66: CMakeFiles/cmTC_c17ea.dir/CheckSymbolExists.c.o] Erro 1
+make[1]: Saindo do diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_c17ea/fast] Erro 2
+
+
+File /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __sparc__
+  return ((int*)(&__sparc__))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the __hppa exist failed with the following output:
+Change Dir: /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_71662/fast && /usr/bin/make -f CMakeFiles/cmTC_71662.dir/build.make CMakeFiles/cmTC_71662.dir/build
+make[1]: Entrando no diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_71662.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_71662.dir/CheckSymbolExists.c.o   -c /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: error: ‘__hppa’ undeclared (first use in this function)
+    7 |   return ((int*)(&__hppa))[argc];
+      |                   ^~~~~~
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: *** [CMakeFiles/cmTC_71662.dir/build.make:66: CMakeFiles/cmTC_71662.dir/CheckSymbolExists.c.o] Erro 1
+make[1]: Saindo do diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_71662/fast] Erro 2
+
+
+File /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __hppa
+  return ((int*)(&__hppa))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the __i386 exist failed with the following output:
+Change Dir: /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0a214/fast && /usr/bin/make -f CMakeFiles/cmTC_0a214.dir/build.make CMakeFiles/cmTC_0a214.dir/build
+make[1]: Entrando no diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0a214.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_0a214.dir/CheckSymbolExists.c.o   -c /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: error: ‘__i386’ undeclared (first use in this function)
+    7 |   return ((int*)(&__i386))[argc];
+      |                   ^~~~~~
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: *** [CMakeFiles/cmTC_0a214.dir/build.make:66: CMakeFiles/cmTC_0a214.dir/CheckSymbolExists.c.o] Erro 1
+make[1]: Saindo do diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_0a214/fast] Erro 2
+
+
+File /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __i386
+  return ((int*)(&__i386))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the __aarch64__ exist failed with the following output:
+Change Dir: /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_92fe9/fast && /usr/bin/make -f CMakeFiles/cmTC_92fe9.dir/build.make CMakeFiles/cmTC_92fe9.dir/build
+make[1]: Entrando no diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_92fe9.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_92fe9.dir/CheckSymbolExists.c.o   -c /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: error: ‘__aarch64__’ undeclared (first use in this function)
+    7 |   return ((int*)(&__aarch64__))[argc];
+      |                   ^~~~~~~~~~~
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: *** [CMakeFiles/cmTC_92fe9.dir/build.make:66: CMakeFiles/cmTC_92fe9.dir/CheckSymbolExists.c.o] Erro 1
+make[1]: Saindo do diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_92fe9/fast] Erro 2
+
+
+File /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __aarch64__
+  return ((int*)(&__aarch64__))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the __ppc__ exist failed with the following output:
+Change Dir: /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_30b49/fast && /usr/bin/make -f CMakeFiles/cmTC_30b49.dir/build.make CMakeFiles/cmTC_30b49.dir/build
+make[1]: Entrando no diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_30b49.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_30b49.dir/CheckSymbolExists.c.o   -c /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: error: ‘__ppc__’ undeclared (first use in this function)
+    7 |   return ((int*)(&__ppc__))[argc];
+      |                   ^~~~~~~
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: *** [CMakeFiles/cmTC_30b49.dir/build.make:66: CMakeFiles/cmTC_30b49.dir/CheckSymbolExists.c.o] Erro 1
+make[1]: Saindo do diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_30b49/fast] Erro 2
+
+
+File /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __ppc__
+  return ((int*)(&__ppc__))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the __powerpc exist failed with the following output:
+Change Dir: /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9b775/fast && /usr/bin/make -f CMakeFiles/cmTC_9b775.dir/build.make CMakeFiles/cmTC_9b775.dir/build
+make[1]: Entrando no diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9b775.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_9b775.dir/CheckSymbolExists.c.o   -c /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: error: ‘__powerpc’ undeclared (first use in this function)
+    7 |   return ((int*)(&__powerpc))[argc];
+      |                   ^~~~~~~~~
+/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: *** [CMakeFiles/cmTC_9b775.dir/build.make:66: CMakeFiles/cmTC_9b775.dir/CheckSymbolExists.c.o] Erro 1
+make[1]: Saindo do diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_9b775/fast] Erro 2
+
+
+File /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __powerpc
+  return ((int*)(&__powerpc))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ff46b/fast && /usr/bin/make -f CMakeFiles/cmTC_ff46b.dir/build.make CMakeFiles/cmTC_ff46b.dir/build
+make[1]: Entrando no diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ff46b.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_ff46b.dir/src.c.o   -c /home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_ff46b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ff46b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_ff46b.dir/src.c.o  -o cmTC_ff46b 
+/usr/bin/ld: CMakeFiles/cmTC_ff46b.dir/src.c.o: na função "main":
+src.c:(.text+0x46): referência não definida para "pthread_create"
+/usr/bin/ld: src.c:(.text+0x52): referência não definida para "pthread_detach"
+/usr/bin/ld: src.c:(.text+0x63): referência não definida para "pthread_join"
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_ff46b.dir/build.make:87: cmTC_ff46b] Erro 1
+make[1]: Saindo do diretório '/home/jr/development/arquitetura/TFSim/systemc-2.3.3/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_ff46b/fast] Erro 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
