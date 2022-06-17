@@ -11,6 +11,7 @@
 #include<nana/gui/filebox.hpp>
 #include "top.hpp"
 #include "gui.hpp"
+#include "file.hpp"
 
 using std::string;
 using std::vector;
@@ -333,6 +334,9 @@ int sc_main(int argc, char *argv[])
             show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
         else
             fila = true;
+
+        FileOut saveObj;
+        saveObj.add_str("************* Fibonacci *************");
     });
     bench_sub->append("Busca em Vetor",[&](menu::item_proxy &ip){
         string path = "in/benchmarks/vector_search.txt";        
@@ -341,6 +345,9 @@ int sc_main(int argc, char *argv[])
             show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
         else
             fila = true;
+
+        FileOut saveObj;
+        saveObj.add_str("************* Vector_search *************");
     });
     bench_sub->append("Stall por Divisão",[&](menu::item_proxy &ip){
         string path = "in/benchmarks/division_stall.txt";       
@@ -349,6 +356,9 @@ int sc_main(int argc, char *argv[])
             show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
         else
             fila = true;
+
+        FileOut saveObj;
+        saveObj.add_str("************* Stall por Divisao *************");
     });
     bench_sub->append("Stress de Memória (Stores)",[&](menu::item_proxy &ip){
         string path = "in/benchmarks/store_stress.txt";     
@@ -357,6 +367,8 @@ int sc_main(int argc, char *argv[])
             show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
         else
             fila = true;
+        FileOut saveObj;
+        saveObj.add_str("************* Store_stress *************");
     });
     bench_sub->append("Stall por hazard estrutural (Adds)",[&](menu::item_proxy &ip){
         string path = "in/benchmarks/res_stations_stall.txt";       
@@ -365,6 +377,9 @@ int sc_main(int argc, char *argv[])
             show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
         else
             fila = true;
+
+        FileOut saveObj;
+        saveObj.add_str("************* Res_stations_stall *************");
     });
     vector<string> columns = {"#","Name","Busy","Op","Vj","Vk","Qj","Qk","A"}; 
     for(unsigned int i = 0 ; i < columns.size() ; i++)
@@ -560,8 +575,11 @@ int sc_main(int argc, char *argv[])
                 top1.simple_mode(nadd,nmul,nls,instruct_time,instruction_queue,table,memory,reg,instruct,clock_count);
             sc_start();
         }
-        else
-            show_message("Fila de instruções vazia","A fila de instruções está vazia. Insira um conjunto de instruções para iniciar.");
+        else{
+                FileOut saveObj;
+                saveObj.add_str("Numero de Clock....: " + sc_time_stamp().to_string());
+                show_message("Fila de instruções vazia","A fila de instruções está vazia. Insira um conjunto de instruções para iniciar.");
+        }
     });
     clock_control.events().click([]
     {

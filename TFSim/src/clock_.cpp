@@ -13,6 +13,16 @@ void clock_::main()
         wait(SC_ZERO_TIME);
         out->write("");
         clock_count.caption(sc_time_stamp().to_string());
+        
+        cout << "Numero de clock...: ";
+        cout << sc_time_stamp().to_string() << endl;
+        
         wait(delay,SC_NS);
     }
+    cout << "Numero [out] de clock...: ";
+    cout << delay << endl;
+}
+
+int clock_::getDelay(){
+    return delay;
 }

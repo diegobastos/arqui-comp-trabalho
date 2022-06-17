@@ -4,6 +4,7 @@ top::top(sc_module_name name): sc_module(name){}
 
 void top::simple_mode(unsigned int nadd, unsigned int nmul,unsigned int nload,map<string,int> instruct_time,vector<string> instruct_queue, nana::listbox &table, nana::grid &mem_gui, nana::listbox &regs, nana::listbox &instr_gui, nana::label &ccount)
 {
+    cout << "Em Simple_mode \n";
     CDB = unique_ptr<bus>(new bus("CDB"));
     mem_bus = unique_ptr<bus>(new bus("mem_bus"));
     clock_bus = unique_ptr<bus>(new bus("clock_bus"));
@@ -53,6 +54,7 @@ void top::simple_mode(unsigned int nadd, unsigned int nmul,unsigned int nload,ma
 
 void top::rob_mode(unsigned int nadd, unsigned int nmul,unsigned int nload,map<string,int> instruct_time, vector<string> instruct_queue, nana::listbox &table, nana::grid &mem_gui, nana::listbox &regs, nana::listbox &instr_gui, nana::label &ccount, nana::listbox &rob_gui)
 {
+    cout << "Em Rob_mode \n";
     int rob_size = 10; //Tamanho do REORDER BUFFER
     CDB = unique_ptr<bus>(new bus("CDB"));
     mem_bus = unique_ptr<bus>(new bus("mem_bus"));

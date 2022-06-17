@@ -4,6 +4,9 @@ res_vector::res_vector(sc_module_name name,unsigned int t1, unsigned int t2,map<
 sc_module(name),
 table(lsbox)
 {
+    cout << "Load Station execution [res_vector].: ";
+    cout << (t1+t2);
+    cout << "\n";
     //Divisao entre instrucoes de multiplicacao/divisao e subtracao/soma, novas instrucoes devem ser adcionadas manualmente aqui
     res_type = {{"DADD",0},{"DADDI",0},{"DADDU",0},{"DADDIU",0},{"DSUB",0},{"DSUBU",0},{"DMUL",1},{"DMULU",1},{"DDIV",1},{"DDIVU",1}};
     auto cat = table.at(0);
@@ -47,7 +50,10 @@ void res_vector::leitura_issue()
         in_issue->nb_read(p);
         ord = instruction_split(p);
         pos = busy_check(ord[0]);
-        while(pos == -1)
+        cout << "\n\nLeitura da Issue [res_vector.cpp]..: ";
+        cout << ord[0];
+        cout << "\n";
+        while(pos == -1)//Tabela carregada
         {
             cout << "Todas as estacoes ocupadas para a instrucao " << p << endl << flush;
             wait(in_cdb->default_event());
@@ -112,6 +118,7 @@ void res_vector::leitura_issue()
 // Determina para qual estacao de reserva a instrucao sera enviada
 int res_vector::busy_check(string inst)
 {
+    cout << "\n Verifica a estacao de reserva [res_vector.cpp, 121]\n";
     unsigned int inst_type = res_type[inst];
     for(unsigned int i = tam_pos[inst_type] ; i < tam_pos[inst_type + 1] ; i++)
         if(!rs[i]->Busy)

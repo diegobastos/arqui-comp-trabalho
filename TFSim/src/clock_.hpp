@@ -9,6 +9,7 @@ public:
     SC_HAS_PROCESS(clock_); 
     clock_(sc_module_name name, int dl, nana::label &clk);
     void main();
+    int getDelay();
 private:
     int delay;
     nana::label &clock_count;

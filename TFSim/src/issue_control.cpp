@@ -15,6 +15,8 @@ void issue_control::issue_select()
 {
     while(true)
     {
+        cout << "\n\t issue[issue_control.cpp]...:";
+        cout << p;
         in->nb_read(p);
         ord = instruction_split(p);
         switch(res_type[ord[0]])
