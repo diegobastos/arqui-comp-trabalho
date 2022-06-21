@@ -55,8 +55,24 @@ void instruction_queue_rob::main()
             if(count == (int)cat.size()){
                 cout << "!!!! Fim de Execucao !!! " << endl;
                 FileOut saveObj;
-                saveObj.add_str("Numero de Instrucoes....: " +  to_string(instruct_queue.size())); 
-                saveObj.add_str("Numero de Clock....: " + sc_time_stamp().to_string());
+                saveObj.add_n_instruction(to_string(instruct_queue.size()));
+                string clk = sc_time_stamp().to_string();
+                string str;
+                for(int j=0; j < (int)sc_time_stamp().to_string().size(); j++){
+                    if(clk[j] !=' '){
+                        str += clk[j];
+                    }else{
+                        break;
+                    }
+                }
+                saveObj.add_clock(str);
+                double cpi  =  std::stof(str)/instruct_queue.size();
+                double ipc  =  instruct_queue.size()/std::stof(str);
+                double mips =  instruct_queue.size() / (1/(std::stof(str)*1000000000));
+                mips = mips /1000000;
+                double timeCpu = instruct_queue.size() * cpi * std::stof(str); 
+                saveObj.add_cpi(to_string(cpi)+","+to_string(ipc)+","+to_string(mips)+","+to_string(timeCpu));
+                saveObj.save_file();
                 sc_stop();
             }
         }
