@@ -17,6 +17,12 @@ class FileOut{
          FileOut();
         ~FileOut();
         void add_str(string line);
+        void add_program(string attribute);
+        void add_clock(string attribute);
+        void add_n_instruction(string attribute);
+        void add_cpi(string attribute);
+        void save_file();
     private:
         ofstream file;
+        string attributes[3];
 };
