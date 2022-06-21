@@ -337,7 +337,7 @@ int sc_main(int argc, char *argv[])
         else
             fila = true;
         FileOut saveObj;
-        saveObj.add_str("************* Fibonacci *************");
+        saveObj.add_program("Fibonacci");
     });
     bench_sub->append("Busca em Vetor",[&](menu::item_proxy &ip){
         string path = "in/benchmarks/vector_search.txt";        
@@ -348,7 +348,7 @@ int sc_main(int argc, char *argv[])
             fila = true;
 
         FileOut saveObj;
-        saveObj.add_str("************* Vector_search *************");
+        saveObj.add_program("Vector_search");
     });
     bench_sub->append("Stall por Divisão",[&](menu::item_proxy &ip){
         string path = "in/benchmarks/division_stall.txt";       
@@ -359,7 +359,7 @@ int sc_main(int argc, char *argv[])
             fila = true;
 
         FileOut saveObj;
-        saveObj.add_str("************* Stall por Divisao *************");
+        saveObj.add_program("Stall por Divisao");
     });
     bench_sub->append("Stress de Memória (Stores)",[&](menu::item_proxy &ip){
         string path = "in/benchmarks/store_stress.txt";     
@@ -369,7 +369,7 @@ int sc_main(int argc, char *argv[])
         else
             fila = true;
         FileOut saveObj;
-        saveObj.add_str("************* Store_stress *************");
+        saveObj.add_program("Store_stress");
     });
     bench_sub->append("Stall por hazard estrutural (Adds)",[&](menu::item_proxy &ip){
         string path = "in/benchmarks/res_stations_stall.txt";       
@@ -582,12 +582,8 @@ int sc_main(int argc, char *argv[])
     });
     clock_control.events().click([]
     {
-        for(int i = 0; i < 3; i++){
-            if(sc_is_running())
-                sc_start();
-            else
-                cout << "Acabou a execucao" << endl;
-        }
+        if(sc_is_running())
+            sc_start();
     });
     exit.events().click([]
     {
@@ -595,10 +591,11 @@ int sc_main(int argc, char *argv[])
         API::exit();
     });
 
-    running_all.events().click([]{
+    running_all.events().click([&]{
         while(sc_is_running()){
             sc_start();
         }
+        show_message("Status de execucao","Execucao concluida com sucesso !");
     });
 
     fm.show();
