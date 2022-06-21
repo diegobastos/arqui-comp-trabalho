@@ -51,12 +51,6 @@ bool add_instructions(ifstream &File,vector<string> &queue, nana::listbox &instr
         }
     }
     
-    FileOut saveObj;
-    saveObj.add_str("Numero de Instrucao....: " + to_string(queue.size()));
-
-    cout << "Tamanho ...:";
-    cout << queue.size();
-    cout << " [Tamanho do arquivo - Instrucoes] Arquivo gui.cpp [52] \n";
     File.close();
     return true;
 }

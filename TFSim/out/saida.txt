@@ -1,2 +1,3 @@
-Numero de Instrucao....: 13
-************* Fibonacci *************
+************* Vector_search *************
+Numero de Instrucoes....: 29
+ Numero de Clock....: 64 ns

@@ -1,5 +1,6 @@
 #include "instruction_queue_rob.hpp"
 #include "general.hpp"
+#include "file.hpp"
 
 instruction_queue_rob::instruction_queue_rob(sc_module_name name, vector<string> inst_q,int rb_sz, nana::listbox &instr):
 sc_module(name),
@@ -44,6 +45,20 @@ void instruction_queue_rob::main()
             pc++;
             wait(SC_ZERO_TIME);
             cat.at(pc-1).text(ISS,"X");
+        }else{
+            int count = 0;
+            for(int i=0; i < (int)cat.size(); i++){
+                 if(!cat.at(i).text(WRITE).compare("X")){
+                    count++;
+                 }
+            }
+            if(count == (int)cat.size()){
+                cout << "!!!! Fim de Execucao !!! " << endl;
+                FileOut saveObj;
+                saveObj.add_str("Numero de Instrucoes....: " +  to_string(instruct_queue.size())); 
+                saveObj.add_str("Numero de Clock....: " + sc_time_stamp().to_string());
+                sc_stop();
+            }
         }
         wait();
     }

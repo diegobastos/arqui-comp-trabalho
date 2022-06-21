@@ -40,6 +40,7 @@ int sc_main(int argc, char *argv[])
     listbox rob(fm);
     menubar mnbar(fm);
     button botao(fm);
+    button running_all(fm);
     button clock_control(fm);
     button exit(fm);
     group clock_group(fm);
@@ -53,10 +54,11 @@ int sc_main(int argc, char *argv[])
     map<string,int> instruct_time{{"DADD",4},{"DADDI",4},{"DSUB",6},{"DSUBI",6},{"DMUL",10},{"DDIV",16},{"MEM",2}};
     top top1("top");
     botao.caption("START");
+    running_all.caption("Running All");
     clock_control.caption("NEXT CYCLE");
     exit.caption("EXIT");
     plc["rst"] << table;
-    plc["btns"] << botao << clock_control << exit;
+    plc["btns"] << botao << clock_control << exit << running_all;
     plc["memor"] << memory;
     plc["regs"] << reg;
     plc["rob"] << rob;
@@ -334,7 +336,6 @@ int sc_main(int argc, char *argv[])
             show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
         else
             fila = true;
-
         FileOut saveObj;
         saveObj.add_str("************* Fibonacci *************");
     });
@@ -576,21 +577,30 @@ int sc_main(int argc, char *argv[])
             sc_start();
         }
         else{
-                FileOut saveObj;
-                saveObj.add_str("Numero de Clock....: " + sc_time_stamp().to_string());
                 show_message("Fila de instruções vazia","A fila de instruções está vazia. Insira um conjunto de instruções para iniciar.");
         }
     });
     clock_control.events().click([]
     {
-        if(sc_is_running())
-            sc_start();
+        for(int i = 0; i < 3; i++){
+            if(sc_is_running())
+                sc_start();
+            else
+                cout << "Acabou a execucao" << endl;
+        }
     });
     exit.events().click([]
     {
         sc_stop();
         API::exit();
     });
+
+    running_all.events().click([]{
+        while(sc_is_running()){
+            sc_start();
+        }
+    });
+
     fm.show();
     exec();
     return 0;

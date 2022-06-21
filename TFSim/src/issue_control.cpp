@@ -28,6 +28,7 @@ void issue_control::issue_select()
                 out_slbuff->write(p);
                 break;
             default:
+                cout << "Ins[error]..: " << ord[0] << endl;
                 cerr << "Instruçao nao suportada!" << endl << flush;
                 sc_stop();
                 exit(1);

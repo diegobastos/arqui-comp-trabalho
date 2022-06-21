@@ -18,7 +18,6 @@ public:
     void leitura_rob();
 private:
     unsigned int pc;
-    
     struct instr_q
     {
         string instruction;

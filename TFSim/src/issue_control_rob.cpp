@@ -19,6 +19,7 @@ issue_control_rob::issue_control_rob(sc_module_name name): sc_module(name)
 void issue_control_rob::issue_select()
 {
     string slb_p;
+    
     while(true)
     {
         in->nb_read(p);
@@ -41,7 +42,7 @@ void issue_control_rob::issue_select()
             case 4:
                 break;
             default:
-                cerr << "Instruçao nao suportada!" << endl << flush;
+                cerr << "Instruçao nao suportada! [issue_control_rob.cpp, 44]" << endl << flush;
                 sc_stop();
                 exit(1);
         }
