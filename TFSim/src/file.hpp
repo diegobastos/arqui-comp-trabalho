@@ -15,6 +15,7 @@ class FileOut{
     public:
          static int n_instruction;
          FileOut();
+         FileOut(string local);
         ~FileOut();
         void add_str(string line);
         void add_program(string attribute);

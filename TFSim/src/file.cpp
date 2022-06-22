@@ -1,5 +1,14 @@
 #include "file.hpp"
 
+FileOut::FileOut(string local){
+    try{
+        string path = string(get_current_dir_name()) + local;
+        file.open(path);
+    }catch(...){
+         cout << "\nErro ao abrir o arquivo\n";
+    }
+}
+
 FileOut::FileOut(){
     try{
         string path = string(get_current_dir_name()) + "/out/experimenter.csv";
@@ -50,7 +59,6 @@ void FileOut::save_file(){
 void FileOut::add_str(string line){
     try{
         file << line;
-        file << endl;    
     }catch(...){
         cout << "\nErro ao salvar no arquivo\n";
     }
