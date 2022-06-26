@@ -52,7 +52,7 @@ int sc_main(int argc, char *argv[])
     // Tempo de latencia de uma instrucao
     // Novas instrucoes devem ser inseridas manualmente aqui
     map<string,int> instruct_time{{"DADD",4},{"DADDI",4},{"DSUB",6},{"DSUBI",6},{"DMUL",10},{"DDIV",16},{"MEM",2},
-    {"AND",1},{"OR",1},{"SLL",1},{"SRL",1}};
+    {"AND",1},{"OR",1},{"DSLL",1},{"DSRL",1},{"DSLT",1}};
     top top1("top");
     botao.caption("START");
     running_all.caption("Running All");
@@ -112,11 +112,12 @@ int sc_main(int argc, char *argv[])
 
         inputbox::text dand_t("AND",std::to_string(instruct_time["AND"]));
         inputbox::text dor_t("OR",std::to_string(instruct_time["OR"]));
-        inputbox::text dsll_t("SLL",std::to_string(instruct_time["SLL"]));
-        inputbox::text dsrl_t("SRL",std::to_string(instruct_time["SRL"]));
+        inputbox::text dsll_t("DSLL",std::to_string(instruct_time["DSLL"]));
+        inputbox::text dsrl_t("DSRL",std::to_string(instruct_time["DSRL"]));
+        inputbox::text dslt_t("DSLT",std::to_string(instruct_time["DSLT"]));
 
         inputbox::text mem_t("Load/Store",std::to_string(instruct_time["MEM"]));
-        if(ibox.show_modal(dadd_t,daddi_t,dsub_t,dsubi_t,dand_t,dor_t,dsll_t,dsrl_t,dmul_t,ddiv_t,mem_t))
+        if(ibox.show_modal(dadd_t,daddi_t,dsub_t,dsubi_t,dand_t,dor_t,dsll_t,dsrl_t,dslt_t,dmul_t,ddiv_t,mem_t))
         {
             instruct_time["DADD"] = std::stoi(dadd_t.value());
             instruct_time["DADDI"] = std::stoi(daddi_t.value());
@@ -125,8 +126,9 @@ int sc_main(int argc, char *argv[])
             
             instruct_time["AND"] = std::stoi(dand_t.value());
             instruct_time["OR"] = std::stoi(dor_t.value());
-            instruct_time["SLL"] = std::stoi(dsll_t.value());
-            instruct_time["SRL"] = std::stoi(dsrl_t.value());
+            instruct_time["DSLL"] = std::stoi(dsll_t.value());
+            instruct_time["DSRL"] = std::stoi(dsrl_t.value());
+            instruct_time["DSLT"] = std::stoi(dslt_t.value());
             
             instruct_time["DMUL"] = std::stoi(dmul_t.value());
             instruct_time["DDIV"] = std::stoi(ddiv_t.value());
@@ -393,8 +395,55 @@ int sc_main(int argc, char *argv[])
             fila = true;
 
         FileOut saveObj;
-        saveObj.add_str("************* Res_stations_stall *************");
+        saveObj.add_program("Res_stations_stall");
     });
+
+    //vector<string> files = {"and","or","show_pares","solu_populacao"};
+    bench_sub->append("and",[&](menu::item_proxy &ip){
+            string path = "in/benchmarks/and.txt"; 
+            cout << "Reading the file ...: " << path;       
+            inFile.open(path);
+            if(!add_instructions(inFile,instruction_queue,instruct))
+                show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
+            else
+                fila = true;
+            FileOut saveObj;
+            saveObj.add_program("and");
+    });
+     bench_sub->append("or",[&](menu::item_proxy &ip){
+            string path = "in/benchmarks/or.txt"; 
+            cout << "Reading the file ...: " << path;       
+            inFile.open(path);
+            if(!add_instructions(inFile,instruction_queue,instruct))
+                show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
+            else
+                fila = true;
+            FileOut saveObj;
+            saveObj.add_program("or");
+    });
+    bench_sub->append("show_pares",[&](menu::item_proxy &ip){
+            string path = "in/benchmarks/show_pares.txt"; 
+            cout << "Reading the file ...: " << path;       
+            inFile.open(path);
+            if(!add_instructions(inFile,instruction_queue,instruct))
+                show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
+            else
+                fila = true;
+            FileOut saveObj;
+            saveObj.add_program("show_pares");
+    });
+    bench_sub->append("solu_populacao",[&](menu::item_proxy &ip){
+            string path = "in/benchmarks/solu_populacao.txt"; 
+            cout << "Reading the file ...: " << path;       
+            inFile.open(path);
+            if(!add_instructions(inFile,instruction_queue,instruct))
+                show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
+            else
+                fila = true;
+            FileOut saveObj;
+            saveObj.add_program("solu_populacao");
+    });
+
     vector<string> columns = {"#","Name","Busy","Op","Vj","Vk","Qj","Qk","A"}; 
     for(unsigned int i = 0 ; i < columns.size() ; i++)
     {
@@ -439,28 +488,44 @@ int sc_main(int argc, char *argv[])
     }
 
     srand(static_cast <unsigned> (time(0)));
-    string lineRegister = "";
-    for(int i = 0 ; i < 32 ; i++)
-    {
-        if(i){
-            string val = std::to_string(rand()%100);
-            lineRegister +=  "R" + std::to_string(i) + " -> " + val;
-            reg_gui.at(i).text(1,val);
-        }else{
-            reg_gui.at(i).text(1,std::to_string(0));
-             lineRegister += "R" + std::to_string(i) + " -> " + "0";
+    
+    FileOut testFile;
+    if( testFile.check_file_exist( string(get_current_dir_name())+"/out/value_register_input.csv")){
+        cout << endl << "Carregando Banco de Registradores !" << endl;
+        std::vector<string> lines = testFile.read_file_csv("/out/value_register_input.csv");
+        int ct = 4;
+        for(int i = 0 ; i < 32 ; i++){
+                reg_gui.at(i).text(1, lines[ct+1]);
+                reg_gui.at(i).text(2,"0");
+                reg_gui.at(i).text(4, lines[ct+3]);
+                reg_gui.at(i).text(5,"0");
+                ct += 4;
         }
-        reg_gui.at(i).text(2,"0");
-        string val2 = std::to_string(static_cast <float> (rand()) / static_cast <float> (RAND_MAX/100.0));
-        lineRegister += " , F" + std::to_string(i) + " -> " + val2;
-        reg_gui.at(i).text(4,val2);
-        reg_gui.at(i).text(5,"0");
-        lineRegister += "\n";
+       
+    }else{
+        cout << endl << "Criando Banco de Registradores !" << endl;
+        string lineRegister = "Register-R,Value-R,Register-F,Value-F\n";
+        for(int i = 0 ; i < 32 ; i++)
+        {
+            if(i){
+                string val = std::to_string(rand()%100);
+                lineRegister +=  "R" + std::to_string(i) + "," + val;
+                reg_gui.at(i).text(1,val);
+            }else{
+                reg_gui.at(i).text(1,std::to_string(0));
+                lineRegister += "R" + std::to_string(i) + "," + "0";
+            }
+            reg_gui.at(i).text(2,"0");
+            string val2 = std::to_string(static_cast <float> (rand()) / static_cast <float> (RAND_MAX/100.0));
+            lineRegister += ",F" + std::to_string(i) + "," + val2;
+            reg_gui.at(i).text(4,val2);
+            reg_gui.at(i).text(5,"0");
+            lineRegister += "\n";
+        }
+        FileOut saveRegister("/out/value_register_input.csv");
+        saveRegister.add_str(lineRegister);
     }
-    FileOut saveRegister("/out/value_register_init.txt");
-    saveRegister.add_str(lineRegister);
-
-    cout << lineRegister << endl;
+    
     for(int i = 0 ; i < 500 ; i++)
         memory.Push(std::to_string(rand()%100));
     for(int k = 1; k < argc; k+=2)
@@ -621,17 +686,15 @@ int sc_main(int argc, char *argv[])
             sc_start();
         }
         show_message("Status de execucao","Execucao concluida com sucesso !");
-        string lineRegister = "";
+        string lineRegister = "Register-R,Value-R,Register-F,Value-F\n";
         for(int i = 0 ; i < 32 ; i++){
            
-            lineRegister += "R" +std::to_string(i)+ " -> " +reg_gui.at(i).text(1);
-            lineRegister += " , F" +std::to_string(i)+ " -> " +reg_gui.at(i).text(4);
+            lineRegister += "R" +std::to_string(i)+ "," +reg_gui.at(i).text(1);
+            lineRegister += ",F" +std::to_string(i)+ "," +reg_gui.at(i).text(4);
             lineRegister += "\n";
         }
-        FileOut saveRegister("/out/value_register_end.txt");
+        FileOut saveRegister("/out/value_register_output.csv");
         saveRegister.add_str(lineRegister);
-        cout << lineRegister << endl;
-    
     });
 
     fm.show();
