@@ -42,16 +42,20 @@ void res_station_rob::exec()
                 res = vj + vk;
             else if(op.substr(0,4) == "DSUB")
                 res = vj - vk;
+            else if(op.substr(0,4) == "DSUBI")
+                res = vj - vk;
             else if(op.substr(0,4) == "DMUL")
                 res = vj * vk;
-            else if(op.substr(0,4) == "AND")
+            else if(op.substr(0,3) == "AND")
                 res = vj and vk;
-            else if(op.substr(0,4) == "OR")
+            else if(op.substr(0,2) == "OR")
                 res = vj or vk;
-            else if(op.substr(0,4) == "SLL")
-                res = (float)(((int)vj) << (int)vk);
-            else if(op.substr(0,4) == "SRL")
-                res = (float)(((int)vj) >> (int)vk);
+            else if(op.substr(0,3) == "DSLL")
+                res = (((int)vj) << (int)vk);
+            else if(op.substr(0,3) == "DSRL")
+                res = (((int)vj) >> (int)vk);
+            else if(op.substr(0,3) == "DSLT")
+                res = vj < vk ? 1 : 0;
             else if(op.substr(0,4) == "DDIV")
             {
                 if(vk)
