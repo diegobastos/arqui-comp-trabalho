@@ -1,6 +1,7 @@
 #include <nana/gui.hpp>
 #include "reorder_buffer.hpp"
 #include "file.hpp"
+#include "gui.hpp"
 
 reorder_buffer::reorder_buffer(sc_module_name name,unsigned int sz,unsigned int pred_size, nana::listbox &gui, nana::listbox::cat_proxy instr_gui): 
 sc_module(name),
@@ -235,6 +236,16 @@ void reorder_buffer::new_rob_head()
             rob_buff.pop_front();
         }
         wait(1,SC_NS);
+
+        int ct = 0;
+        for(int k=0; k < (int)rob_buff.size();k++){
+            if(rob_buff[k]->busy )
+                ct++;
+        }
+        if(!ct){
+            show_message("Warnning", "Buffer ...:" + to_string(rob_buff.size()));
+            //sc_stop();
+        }
     }
 }
 
