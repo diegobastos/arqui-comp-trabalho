@@ -1,6 +1,8 @@
 #include "instruction_queue_rob.hpp"
 #include "general.hpp"
 #include "file.hpp"
+#include "gui.hpp"
+
 
 instruction_queue_rob::instruction_queue_rob(sc_module_name name, vector<string> inst_q,int rb_sz, nana::listbox &instr):
 sc_module(name),
@@ -22,6 +24,7 @@ instructions(instr)
     SC_METHOD(leitura_rob);
     sensitive << in_rob;
     dont_initialize();
+    
 }
 
 void instruction_queue_rob::main()
@@ -46,34 +49,37 @@ void instruction_queue_rob::main()
             wait(SC_ZERO_TIME);
             cat.at(pc-1).text(ISS,"X");
         }else{
+
             int count = 0;
             for(int i=0; i < (int)cat.size(); i++){
                  if(!cat.at(i).text(WRITE).compare("X")){
                     count++;
                  }
             }
+           
             if(count == (int)cat.size()){
                 cout << "!!!! Fim de Execucao !!! " << endl;
                 FileOut saveObj;
                 saveObj.add_n_instruction(to_string(instruct_queue.size()));
                 string clk = sc_time_stamp().to_string();
-                string str;
+                string str_clk;
                 for(int j=0; j < (int)sc_time_stamp().to_string().size(); j++){
                     if(clk[j] !=' '){
-                        str += clk[j];
+                        str_clk += clk[j];
                     }else{
                         break;
                     }
                 }
-                saveObj.add_clock(str);
-                double cpi  =  std::stof(str)/instruct_queue.size();
-                double ipc  =  instruct_queue.size()/std::stof(str);
-                double mips =  instruct_queue.size() / (1/(std::stof(str)*1000000000));
-                mips = mips /1000000;
-                double timeCpu = instruct_queue.size() * cpi * std::stof(str); 
+                saveObj.add_clock(str_clk);
+                double cpi  =  std::stof(str_clk)/instruct_queue.size();
+                double ipc  =  instruct_queue.size()/std::stof(str_clk);
+                double mips =  instruct_queue.size() / ((std::stof(str_clk)*(1.0/1000000000)));
+                mips = mips/1000000;
+                double timeCpu = ((std::stof(str_clk)*(1.0/1000000000))); 
                 saveObj.add_cpi(to_string(cpi)+","+to_string(ipc)+","+to_string(mips)+","+to_string(timeCpu));
                 saveObj.save_file();
-                sc_stop();
+                show_message("Métricas","CPI="+to_string(cpi)+"; IPC="+to_string(ipc)+"; Mips="+to_string(mips));
+                sc_stop(); 
             }
         }
         wait();
