@@ -1,5 +1,6 @@
 #include "res_station_rob.hpp"
 #include "general.hpp"
+#include "gui.hpp"
 
 
 res_station_rob::res_station_rob(sc_module_name name,int i, string n,bool isMem, map<string,int> inst_map, const nana::listbox::item_proxy item, const nana::listbox::cat_proxy c, const nana::listbox::cat_proxy rgui):
@@ -50,11 +51,11 @@ void res_station_rob::exec()
                 res = vj and vk;
             else if(op.substr(0,2) == "OR")
                 res = vj or vk;
-            else if(op.substr(0,3) == "DSLL")
-                res = (((int)vj) << (int)vk);
-            else if(op.substr(0,3) == "DSRL")
-                res = (((int)vj) >> (int)vk);
-            else if(op.substr(0,3) == "DSLT")
+            else if(op.substr(0,4) == "DSLL")
+                res = (int)vj << (int)vk;
+            else if(op.substr(0,4) == "DSRL")
+                res = (int)vj >> (int)vk;
+            else if(op.substr(0,4) == "DSLT")
                 res = vj < vk ? 1 : 0;
             else if(op.substr(0,4) == "DDIV")
             {
