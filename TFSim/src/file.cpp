@@ -33,6 +33,7 @@ bool FileOut::check_file_exist(string path){
     }catch(...){
         cout << "Erro ao tentar abrir o arquivo";
     }
+    return false;
 }
 
 void FileOut::add_program(string attribute){
@@ -85,9 +86,9 @@ FileOut::~FileOut(){
 }
 
 vector<string> FileOut::read_file_csv(string local){
+    vector<string> lines;
     try{
         string path = string(get_current_dir_name()) + local;
-        vector<string> lines;
         fstream input;
         input.open(path, ios::in);
         string line;
@@ -108,4 +109,5 @@ vector<string> FileOut::read_file_csv(string local){
     }catch(...){
         cout << "\nErro ao abrir o arquivo \n";
     }
+    return lines;
 }
