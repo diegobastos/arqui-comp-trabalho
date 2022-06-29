@@ -23,6 +23,7 @@ int sc_main(int argc, char *argv[])
 {
     using namespace nana;
     vector<string> instruction_queue;
+    string program_selected = "/out/value_register_input";
     int nadd,nmul,nls;
     nadd = 3;
     nmul = nls = 2;
@@ -82,6 +83,7 @@ int sc_main(int argc, char *argv[])
             spec = false;
         set_spec(plc,spec);
     });
+
     op.check_style(0,menu::checks::highlight);
     op.append("Modificar valores...");
     auto sub = op.create_sub_menu(1);
@@ -234,9 +236,13 @@ int sc_main(int argc, char *argv[])
     op.append("Verificar conteúdo...");
     auto new_sub = op.create_sub_menu(2);
     new_sub->append("Valores de registradores",[&](menu::item_proxy &ip) {
+        
         filebox fb(0,true);
         inputbox ibox(fm,"Localização do arquivo de valores de registradores:");
-        inputbox::path caminho("",fb);
+        inputbox::path caminho(string(get_current_dir_name()),fb);
+
+        show_message("Status", caminho.value());
+
         if(ibox.show_modal(caminho))
         {
             auto path = caminho.value();
@@ -343,6 +349,7 @@ int sc_main(int argc, char *argv[])
         }
     });
     op.append("Benchmarks");
+    auto reg_gui = reg.at(0);
     auto bench_sub = op.create_sub_menu(3);
     bench_sub->append("Fibonacci",[&](menu::item_proxy &ip){
         string path = "in/benchmarks/fibonacci.txt";        
@@ -400,40 +407,154 @@ int sc_main(int argc, char *argv[])
 
     //vector<string> files = {"and","or","show_pares","solu_populacao"};
     bench_sub->append("and",[&](menu::item_proxy &ip){
-            string path = "in/benchmarks/and.txt"; 
+            string path = "in/benchmarks/and/and.txt";
+            program_selected = "/in/benchmarks/and/and_input"; 
             cout << "Reading the file ...: " << path;       
             inFile.open(path);
             if(!add_instructions(inFile,instruction_queue,instruct))
                 show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
-            else
+            else{
                 fila = true;
+                FileOut testFile;
+                string local_file = string(get_current_dir_name())+program_selected+".csv";
+                if( testFile.check_file_exist(local_file )){
+                    cout  << "Carregando Banco de Registradores[ " << local_file << "] !" << endl;
+                    std::vector<string> lines = testFile.read_file_csv(program_selected+".csv");
+                    int ct = 4;
+                    for(int i = 0 ; i < 32 ; i++){
+                        reg_gui.at(i).text(1, lines[ct+1]);
+                        reg_gui.at(i).text(2,"0");
+                        reg_gui.at(i).text(4, lines[ct+3]);
+                        reg_gui.at(i).text(5,"0");
+                        ct += 4;
+                    }
+                }
+                FileOut testF;
+                string fileMemory = string(get_current_dir_name())+"/in/benchmarks/and/and_memory_input.csv";
+                if( testF.check_file_exist(fileMemory)){
+                    cout << "Load values of memory " << endl;
+                    std::vector<string> lines = testF.read_file_csv("/in/benchmarks/and/and_memory_input.csv");
+                    for(int i = 0; i < 500; i++){
+                        memory.Push(lines[i]);
+                    }
+                }
+            }
             FileOut saveObj;
             saveObj.add_program("and");
     });
-     bench_sub->append("or",[&](menu::item_proxy &ip){
-            string path = "in/benchmarks/or.txt"; 
+    bench_sub->append("or",[&](menu::item_proxy &ip){
+            string path = "in/benchmarks/or/or.txt";
+            program_selected = "/in/benchmarks/or/or_input"; 
             cout << "Reading the file ...: " << path;       
             inFile.open(path);
             if(!add_instructions(inFile,instruction_queue,instruct))
                 show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
-            else
+            else{
                 fila = true;
+                FileOut testFile;
+                string local_file = string(get_current_dir_name())+program_selected+".csv";
+    
+                if( testFile.check_file_exist(local_file )){
+                    cout  << "Carregando Banco de Registradores[ " << local_file << "] !" << endl;
+                    std::vector<string> lines = testFile.read_file_csv(program_selected+".csv");
+                    int ct = 4;
+                    for(int i = 0 ; i < 32 ; i++){
+                        reg_gui.at(i).text(1, lines[ct+1]);
+                        reg_gui.at(i).text(2,"0");
+                        reg_gui.at(i).text(4, lines[ct+3]);
+                        reg_gui.at(i).text(5,"0");
+                        ct += 4;
+                    }
+                }
+                FileOut testF;
+                string fileMemory = string(get_current_dir_name())+"/in/benchmarks/or/or_memory_input.csv";
+                if( testF.check_file_exist(fileMemory)){
+                    cout << "Load values of memory " << endl;
+                    std::vector<string> lines = testF.read_file_csv("/in/benchmarks/or/or_memory_input.csv");
+                    for(int i = 0; i < 500; i++){
+                        memory.Push(lines[i]);
+                    }
+                }
+            }
             FileOut saveObj;
             saveObj.add_program("or");
     });
     bench_sub->append("show_pares",[&](menu::item_proxy &ip){
-            string path = "in/benchmarks/show_pares.txt"; 
+            string path = "in/benchmarks/show_pares/show_pares.txt"; 
+            program_selected = "/in/benchmarks/show_pares/show_pares_input";
             cout << "Reading the file ...: " << path;       
             inFile.open(path);
             if(!add_instructions(inFile,instruction_queue,instruct))
                 show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
-            else
+            else{
                 fila = true;
+                FileOut testFile;
+                string local_file = string(get_current_dir_name())+program_selected+".csv";
+    
+                if( testFile.check_file_exist(local_file )){
+                    cout  << "Carregando Banco de Registradores[ " << local_file << "] !" << endl;
+                    std::vector<string> lines = testFile.read_file_csv(program_selected+".csv");
+                    int ct = 4;
+                    for(int i = 0 ; i < 32 ; i++){
+                        reg_gui.at(i).text(1, lines[ct+1]);
+                        reg_gui.at(i).text(2,"0");
+                        reg_gui.at(i).text(4, lines[ct+3]);
+                        reg_gui.at(i).text(5,"0");
+                        ct += 4;
+                    }
+                }
+                FileOut testF;
+                string fileMemory = string(get_current_dir_name())+"/in/benchmarks/show_pares/show_pares_memory_input.csv";
+                if( testF.check_file_exist(fileMemory)){
+                    cout << "Load values of memory " << endl;
+                    std::vector<string> lines = testF.read_file_csv("/in/benchmarks/show_pares/show_pares_memory_input.csv");
+                    for(int i = 0; i < 500; i++){
+                        memory.Push(lines[i]);
+                    }
+                }
+            }
             FileOut saveObj;
             saveObj.add_program("show_pares");
     });
     bench_sub->append("solu_populacao",[&](menu::item_proxy &ip){
-            string path = "in/benchmarks/solu_populacao.txt"; 
+            string path = "in/benchmarks/solu_populacao/solu_populacao.txt";
+            program_selected = "/in/benchmarks/solu_populacao/solu_populacao_input"; 
+            cout << "Reading the file ...: " << path;       
+            inFile.open(path);
+            if(!add_instructions(inFile,instruction_queue,instruct))
+                show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
+            else{
+                fila = true;
+                FileOut testFile;
+                string local_file = string(get_current_dir_name())+program_selected+".csv";
+    
+                if( testFile.check_file_exist(local_file )){
+                    cout  << "Carregando Banco de Registradores[ " << local_file << "] !" << endl;
+                    std::vector<string> lines = testFile.read_file_csv(program_selected+".csv");
+                    int ct = 4;
+                    for(int i = 0 ; i < 32 ; i++){
+                        reg_gui.at(i).text(1, lines[ct+1]);
+                        reg_gui.at(i).text(2,"0");
+                        reg_gui.at(i).text(4, lines[ct+3]);
+                        reg_gui.at(i).text(5,"0");
+                        ct += 4;
+                    }
+                }
+                FileOut testF;
+                string fileMemory = string(get_current_dir_name())+"/in/benchmarks/solu_populacao/solu_populacao_memory_input.csv";
+                if( testF.check_file_exist(fileMemory)){
+                    cout << "Load values of memory " << endl;
+                    std::vector<string> lines = testF.read_file_csv("/in/benchmarks/solu_populacao/solu_populacao_memory_input.csv");
+                    for(int i = 0; i < 500; i++){
+                        memory.Push(lines[i]);
+                    }
+                }
+            }
+            FileOut saveObj;
+            saveObj.add_program("solu_populacao");
+    });
+    bench_sub->append("bubbleSort",[&](menu::item_proxy &ip){
+            string path = "in/benchmarks/buble_sort.txt";
             cout << "Reading the file ...: " << path;       
             inFile.open(path);
             if(!add_instructions(inFile,instruction_queue,instruct))
@@ -441,8 +562,9 @@ int sc_main(int argc, char *argv[])
             else
                 fila = true;
             FileOut saveObj;
-            saveObj.add_program("solu_populacao");
+            saveObj.add_program("bubbleSort");
     });
+
 
     vector<string> columns = {"#","Name","Busy","Op","Vj","Vk","Qj","Qk","A"}; 
     for(unsigned int i = 0 ; i < columns.size() ; i++)
@@ -464,7 +586,7 @@ int sc_main(int argc, char *argv[])
             reg.column_at(k*columns.size() + i).width(sizes[i]);
         }
 
-    auto reg_gui = reg.at(0);
+  
     for(int i = 0 ; i < 32 ;i++)
     {
         string index = std::to_string(i);
@@ -488,11 +610,12 @@ int sc_main(int argc, char *argv[])
     }
 
     srand(static_cast <unsigned> (time(0)));
-    
+
     FileOut testFile;
-    if( testFile.check_file_exist( string(get_current_dir_name())+"/out/value_register_input.csv")){
-        cout << endl << "Carregando Banco de Registradores !" << endl;
-        std::vector<string> lines = testFile.read_file_csv("/out/value_register_input.csv");
+    string local_file = string(get_current_dir_name())+program_selected+".csv";
+    if( testFile.check_file_exist(local_file )){
+        cout  << "Carregando Banco de Registradores[ " << local_file << "] !" << endl;
+        std::vector<string> lines = testFile.read_file_csv(program_selected+".csv");
         int ct = 4;
         for(int i = 0 ; i < 32 ; i++){
                 reg_gui.at(i).text(1, lines[ct+1]);
@@ -526,8 +649,27 @@ int sc_main(int argc, char *argv[])
         saveRegister.add_str(lineRegister);
     }
     
-    for(int i = 0 ; i < 500 ; i++)
-        memory.Push(std::to_string(rand()%100));
+    FileOut testF;
+    string fileMemory = string(get_current_dir_name())+"/out/value_memory_input.csv";
+    if( testF.check_file_exist(fileMemory)){
+        cout << "Load values of memory " << endl;
+        std::vector<string> lines = testF.read_file_csv("/out/value_memory_input.csv");
+        for(int i = 0; i < 500; i++){
+            memory.Push(lines[i]);
+        }
+    }else{
+        string lineMemory = "";
+        for(int i = 0 ; i < 500 ; i++){
+            string strM = std::to_string(rand()%100);
+            memory.Push(strM);
+            if(i < (500-1) )
+                lineMemory += strM + ",";
+            else
+                lineMemory += strM;
+        }
+        FileOut saveRegister("/out/value_memory_input.csv");
+        saveRegister.add_str(lineMemory);
+    }
     for(int k = 1; k < argc; k+=2)
     {
         int i;
