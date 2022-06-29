@@ -56,7 +56,13 @@ void instruction_queue_rob::main()
                     count++;
                  }
             }
-           
+            
+            /*FileOut checkF;
+            string path = string(get_current_dir_name()) + "/out/exit.in";
+            if(checkF.check_file_exist(path)){
+                show_message("Status ", "Acabamos no RoB");
+            }*/
+
             if(count == (int)cat.size()){
                 cout << "!!!! Fim de Execucao !!! " << endl;
                 FileOut saveObj;
