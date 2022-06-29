@@ -235,17 +235,18 @@ void reorder_buffer::new_rob_head()
             free_rob_event.notify(1,SC_NS);
             rob_buff.pop_front();
         }
-        wait(1,SC_NS);
-
-        int ct = 0;
+        /*int ct = 0;
         for(int k=0; k < (int)rob_buff.size();k++){
             if(rob_buff[k]->busy )
                 ct++;
         }
         if(!ct){
-            show_message("Warnning", "Buffer ...:" + to_string(rob_buff.size()));
+            show_message("Warnning", "Buffer(Vazio) ...:" + to_string(rob_buff.size()));
+            FileOut end("/out/exit.in");
             //sc_stop();
-        }
+        }*/
+        wait(1,SC_NS);
+
     }
 }
 
