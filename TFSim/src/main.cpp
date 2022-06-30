@@ -49,11 +49,11 @@ int sc_main(int argc, char *argv[])
     fm.caption("TFSim");
     clock_group.caption("Ciclo de Clock");
     clock_group.div("count");
-    grid memory(fm,rectangle(),10,50);
+    grid memory(fm,rectangle(),20,50);
     // Tempo de latencia de uma instrucao
     // Novas instrucoes devem ser inseridas manualmente aqui
     map<string,int> instruct_time{{"DADD",4},{"DADDI",4},{"DSUB",6},{"DSUBI",6},{"DMUL",10},{"DDIV",16},{"MEM",2},
-    {"AND",1},{"OR",1},{"DSLL",1},{"DSRL",1},{"DSLT",1}};
+    {"AND",1},{"OR",1},{"DSLL",2},{"DSRL",2},{"DSLT",2}};
     top top1("top");
     botao.caption("START");
     running_all.caption("Running All");
@@ -85,7 +85,6 @@ int sc_main(int argc, char *argv[])
     });
 
     op.check_style(0,menu::checks::highlight);
-    op.append("Comparar arquivos");
     op.append("Modificar valores...");
     auto sub = op.create_sub_menu(1);
     sub->append("Número de Estações de Reserva",[&](menu::item_proxy ip)
@@ -221,12 +220,12 @@ int sc_main(int argc, char *argv[])
             {
                 int i = 0;
                 int value;
-                while(inFile >> value && i < 500)
+                while(inFile >> value && i < 1001)
                 {
                     memory.Set(i,std::to_string(value));
                     i++;
                 }
-                for(; i < 500 ; i++)
+                for(; i < 1001 ; i++)
                 {
                     memory.Set(i,"0");
                 }
@@ -324,7 +323,7 @@ int sc_main(int argc, char *argv[])
                 string value;
                 bool ok; 
                 ok = true;
-                for(int i = 0 ; i < 500 ; i++)
+                for(int i = 0 ; i < 1001 ; i++)
                 {
                     inFile >> value;
                     if(std::stoi(memory.Get(i)) != (int)std::stol(value,nullptr,16))
@@ -435,7 +434,7 @@ int sc_main(int argc, char *argv[])
                 if( testF.check_file_exist(fileMemory)){
                     cout << "Load values of memory " << endl;
                     std::vector<string> lines = testF.read_file_csv("/in/benchmarks/and/and_memory_input.csv");
-                    for(int i = 0; i < 500; i++){
+                    for(int i = 0; i < 1001; i++){
                         memory.Push(lines[i]);
                     }
                 }
@@ -472,7 +471,7 @@ int sc_main(int argc, char *argv[])
                 if( testF.check_file_exist(fileMemory)){
                     cout << "Load values of memory " << endl;
                     std::vector<string> lines = testF.read_file_csv("/in/benchmarks/or/or_memory_input.csv");
-                    for(int i = 0; i < 500; i++){
+                    for(int i = 0; i < 1001; i++){
                         memory.Push(lines[i]);
                     }
                 }
@@ -509,7 +508,7 @@ int sc_main(int argc, char *argv[])
                 if( testF.check_file_exist(fileMemory)){
                     cout << "Load values of memory " << endl;
                     std::vector<string> lines = testF.read_file_csv("/in/benchmarks/show_pares/show_pares_memory_input.csv");
-                    for(int i = 0; i < 500; i++){
+                    for(int i = 0; i < 1001; i++){
                         memory.Push(lines[i]);
                     }
                 }
@@ -546,7 +545,7 @@ int sc_main(int argc, char *argv[])
                 if( testF.check_file_exist(fileMemory)){
                     cout << "Load values of memory " << endl;
                     std::vector<string> lines = testF.read_file_csv("/in/benchmarks/solu_populacao/solu_populacao_memory_input.csv");
-                    for(int i = 0; i < 500; i++){
+                    for(int i = 0; i < 1001; i++){
                         memory.Push(lines[i]);
                     }
                 }
@@ -554,16 +553,40 @@ int sc_main(int argc, char *argv[])
             FileOut saveObj;
             saveObj.add_program("solu_populacao");
     });
-    bench_sub->append("bubbleSort",[&](menu::item_proxy &ip){
-            string path = "in/benchmarks/buble_sort.txt";
+    bench_sub->append("loop unrolling",[&](menu::item_proxy &ip){
+            string path = "in/benchmarks/loop_unrolling/loop_unrolling.txt";
             cout << "Reading the file ...: " << path;       
             inFile.open(path);
             if(!add_instructions(inFile,instruction_queue,instruct))
                 show_message("Arquivo inválido","Não foi possível abrir o arquivo!");
-            else
+            else{
                 fila = true;
+                FileOut testFile;
+                string local_file = string(get_current_dir_name())+"/in/benchmarks/loop_unrolling/loop_unrolling_input.csv";
+                if( testFile.check_file_exist(local_file )){
+                    cout  << "Carregando Banco de Registradores[ " << local_file << "] !" << endl;
+                    std::vector<string> lines = testFile.read_file_csv("/in/benchmarks/loop_unrolling/loop_unrolling_input.csv");
+                    int ct = 4;
+                    for(int i = 0 ; i < 32 ; i++){
+                        reg_gui.at(i).text(1, lines[ct+1]);
+                        reg_gui.at(i).text(2,"0");
+                        reg_gui.at(i).text(4, lines[ct+3]);
+                        reg_gui.at(i).text(5,"0");
+                        ct += 4;
+                    }
+                }
+                FileOut testF;
+                string fileMemory = string(get_current_dir_name())+"/in/benchmarks/loop_unrolling/loop_unrolling_memory_input.csv";
+                if( testF.check_file_exist(fileMemory)){
+                    cout << "Load values of memory " << endl;
+                    std::vector<string> lines = testF.read_file_csv("/in/benchmarks/loop_unrolling/loop_unrolling_memory_input.csv");
+                    for(int i = 0; i < 1001; i++){
+                        memory.Push(lines[i]);
+                    }
+                }
+            }
             FileOut saveObj;
-            saveObj.add_program("bubbleSort");
+            saveObj.add_program("loopUnrooling");
     });
    
 
@@ -655,15 +678,15 @@ int sc_main(int argc, char *argv[])
     if( testF.check_file_exist(fileMemory)){
         cout << "Load values of memory " << endl;
         std::vector<string> lines = testF.read_file_csv("/out/value_memory_input.csv");
-        for(int i = 0; i < 500; i++){
+        for(int i = 0; i < 1001; i++){
             memory.Push(lines[i]);
         }
     }else{
         string lineMemory = "";
-        for(int i = 0 ; i < 500 ; i++){
+        for(int i = 0 ; i < 1001 ; i++){
             string strM = std::to_string(rand()%100);
             memory.Push(strM);
-            if(i < (500-1) )
+            if(i < (1001-1) )
                 lineMemory += strM + ",";
             else
                 lineMemory += strM;
@@ -736,12 +759,12 @@ int sc_main(int argc, char *argv[])
                     {
                         int value;
                         i = 0;
-                        while(inFile >> value && i < 500)
+                        while(inFile >> value && i < 1001)
                         {
                             memory.Set(i,std::to_string(value));
                             i++;
                         }
-                        for(; i < 500 ; i++)
+                        for(; i < 1001 ; i++)
                         {
                             memory.Set(i,"0");
                         }
