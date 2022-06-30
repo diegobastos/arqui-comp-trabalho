@@ -85,6 +85,7 @@ int sc_main(int argc, char *argv[])
     });
 
     op.check_style(0,menu::checks::highlight);
+    op.append("Comparar arquivos");
     op.append("Modificar valores...");
     auto sub = op.create_sub_menu(1);
     sub->append("Número de Estações de Reserva",[&](menu::item_proxy ip)
@@ -564,7 +565,7 @@ int sc_main(int argc, char *argv[])
             FileOut saveObj;
             saveObj.add_program("bubbleSort");
     });
-
+   
 
     vector<string> columns = {"#","Name","Busy","Op","Vj","Vk","Qj","Qk","A"}; 
     for(unsigned int i = 0 ; i < columns.size() ; i++)
@@ -670,6 +671,10 @@ int sc_main(int argc, char *argv[])
         FileOut saveRegister("/out/value_memory_input.csv");
         saveRegister.add_str(lineMemory);
     }
+
+    FileOut file_1;
+    FileOut file_2;
+    string msg;                
     for(int k = 1; k < argc; k+=2)
     {
         int i;
@@ -780,6 +785,27 @@ int sc_main(int argc, char *argv[])
                         }
                     }
                     inFile.close();
+                    break;
+                case 'c':     
+                    msg = "Os arquivos sao iguais !";
+                    if( file_1.check_file_exist(argv[k+1])){
+                        std::vector<string> lines = file_1.read_file_csv(argv[k+1]);
+                        if(file_2.check_file_exist(argv[k+2])){
+                            std::vector<string> lines2 = file_2.read_file_csv(argv[k+2]);
+                            for(unsigned int l=0; l < lines2.size(); l++){
+                                if( lines2[l] != lines[l] ){
+                                    msg = "Os arquivos nao sao iguais";
+                                    break;
+                                }
+                            }    
+                        }else{
+                            msg = "Os arquivos nao sao iguais";
+                        }
+                    }else{
+                        msg = "Os arquivos nao sao iguais";
+                    } 
+                    show_message("Arquivos",msg);
+                    k = argc;
                     break;
                 default:
                     show_message("Opção inválida",string("Opção \"") + string(argv[k]) + string("\" inválida"));
