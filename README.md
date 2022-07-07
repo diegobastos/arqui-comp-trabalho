@@ -1,5 +1,4 @@
 # arqui-comp-trabalho
-
 # Descrições sobre o código
 
 ** Quantidade de instruções do arquivo
