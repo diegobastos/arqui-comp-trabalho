@@ -10,8 +10,7 @@ class instruction_queue_rob: public sc_module
 public:
     sc_port<read_if> in;
     sc_port<write_if_f> out;
-    sc_port<read_if> in_rob;
-
+    sc_port<read_if> in_rob; 
     SC_HAS_PROCESS(instruction_queue_rob);
     instruction_queue_rob(sc_module_name name, vector<string> inst_q,int rb_sz, nana::listbox &instr);
     void main();

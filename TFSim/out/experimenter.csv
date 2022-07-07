@@ -1,0 +1,2 @@
+data,programa,n_instrucao,n_clock,cpi,ipc,mips,t_cpu
+Wed Jun 29 15:20:03 2022,loopUnrooling,2603,9053,3.477910,0.287529,287.528996,0.000009

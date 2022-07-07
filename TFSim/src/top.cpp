@@ -146,4 +146,5 @@ void top::rob_mode(unsigned int nadd, unsigned int nmul,unsigned int nload,map<s
     mem_r->in(*mem_bus);
     mem_r->out(*CDB);
     mem_r->out_slb(*mem_slb_bus);
+
 }
